@@ -73,12 +73,8 @@ void leds_init(uint16_t * puerto) {
     *puntero = ALL_LED_OFF;
 }
 
-bool leds_turn_on(int led) {
-    if ((led <= LED_16) && (led >= LED_01)) {
-        *puntero |= led_to_mask(led);
-        return true;
-    } else
-        return false;
+void leds_turn_on(int led) {
+    *puntero |= led_to_mask(led);
 }
 
 void leds_turn_off(int led) {

@@ -59,7 +59,7 @@ void leds_init(uint16_t * puerto);
  *
  * @param led numero de bit correspondiente al led
  */
-bool leds_turn_on(int led);
+void leds_turn_on(int led);
 
 /**
  * @brief Funcion para apagar un LED
