@@ -41,26 +41,6 @@ extern "C" {
 
 /* === Public macros definitions ===================================== */
 
-#define LED_01      1
-#define LED_02      2
-#define LED_03      3
-#define LED_04      4
-#define LED_05      5
-#define LED_06      6
-#define LED_07      7
-#define LED_08      8
-#define LED_09      9
-#define LED_10      10
-#define LED_11      11
-#define LED_12      12
-#define LED_14      13
-#define LED_15      15
-#define LED_16      16
-#define ALL_LED_ON  0xFF
-#define ALL_LED_OFF 0x00
-#define BIT_HIGH    1
-#define LED_OFFSET  1
-
 /* === Public data type declarations ===================================== */
 
 /* === Public variable declarations ===================================== */
