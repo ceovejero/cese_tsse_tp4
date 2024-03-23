@@ -127,6 +127,7 @@ void test_apagar_y_prender_varios_leds(void) {
 void test_consultar_estado_de_led(void) {
     leds_init(&leds_virtuales);
     leds_turn_on(LED_05);
+    TEST_ASSERT_EQUAL_UINT16(BIT_HIGH << (LED_05 - LED_OFFSET), leds_virtuales);
     TEST_ASSERT_TRUE(leds_get_status(LED_05));
 }
 
