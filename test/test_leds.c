@@ -47,8 +47,10 @@ SPDX-License-Identifier: MIT
 #define LED_14      13
 #define LED_15      15
 #define LED_16      16
-#define ALL_LED_ON  0xFF
-#define ALL_LED_OFF 0x00
+#define LED_17      17
+#define LED_18      18
+#define ALL_LED_ON  0xFFFF
+#define ALL_LED_OFF 0x0000
 #define BIT_HIGH    1
 #define LED_OFFSET  1
 
