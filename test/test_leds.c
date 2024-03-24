@@ -133,15 +133,67 @@ void test_consultar_estado_de_led(void) {
 /// @brief Test 6
 /// Prender todos los leds que estan apagados y
 /// verificar que todos encendidos
+void test_encender_todos_y_verificar_todos_encendidos(void) {
+
+    leds_turn_on_all();
+    TEST_ASSERT_EQUAL_UINT16(ALL_LED_ON, leds_virtuales);
+}
 
 /// @brief Test 7
 /// Apagar todos los leds que estan encendidos y
 /// verificar que todos apagados
+void test_apagar_todos_y_verificar_todos_apagados(void) {
+
+    leds_turn_off_all();
+    TEST_ASSERT_EQUAL_UINT16(ALL_LED_OFF, leds_virtuales);
+}
 
 /// @brief Test 8
-/// Coprobar valores prohibidos
+/// Coprobar valores prohibidos, en el encendido
 ///
+void test_encender_leds_no_validos(void) {
+
+    leds_init(&leds_virtuales);
+
+    TEST_ASSERT_FALSE(leds_turn_on(LED_18));
+}
 
 /// @brief Test 9
-/// Coprobar valores de limite
+/// Coprobar valores prohibidos, en el apagado
 ///
+void test_apagar_leds_no_validos(void) {
+
+    leds_init(&leds_virtuales);
+    leds_turn_on(LED_18);
+
+    TEST_ASSERT_FALSE(leds_turn_off(LED_18));
+}
+
+/// @brief Test 10
+/// Coprobar valores prohibidos,
+/// en la consulta de estado de leds
+void test_consultar_estado_de_leds_no_validos(void) {
+
+    leds_init(&leds_virtuales);
+    leds_turn_on(LED_18);
+
+    TEST_ASSERT_FALSE(leds_get_status(LED_18));
+}
+
+/// @brief Test 11
+/// Encender valores de limite
+///
+void test_encender_limites(void) {
+    leds_init(&leds_virtuales);
+    leds_turn_on(LED_01 - 1);
+    TEST_ASSERT_FALSE(leds_turn_on(LED_01 - 1));
+}
+
+/// @brief Test 12
+/// Apagar valores de limite
+///
+void test_apagar_limites(void) {
+    leds_init(&leds_virtuales);
+    leds_turn_on(LED_16 + 1);
+    TEST_ASSERT_FALSE(leds_turn_on(LED_16 + 1));
+}
