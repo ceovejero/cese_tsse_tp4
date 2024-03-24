@@ -68,13 +68,20 @@ static uint16_t led_to_mask(int led) {
     return (BIT_HIGH << (led - LED_OFFSET));
 }
 
+bool is_led_valid(int led) {
+    if ((led <= LED_16) && (led >= LED_01))
+        return true;
+    else
+        return false;
+}
+
 void leds_init(uint16_t * puerto) {
     puntero = puerto;
     *puntero = ALL_LED_OFF;
 }
 
 bool leds_turn_on(int led) {
-    if ((led <= LED_16) && (led >= LED_01)) {
+    if (is_led_valid(led)) {
         *puntero |= led_to_mask(led);
         return true;
     } else
@@ -82,7 +89,7 @@ bool leds_turn_on(int led) {
 }
 
 bool leds_turn_off(int led) {
-    if ((led <= LED_16) && (led >= LED_01)) {
+    if (is_led_valid(led)) {
         *puntero &= ~led_to_mask(led);
         return true;
     } else
@@ -90,7 +97,7 @@ bool leds_turn_off(int led) {
 }
 
 bool leds_get_status(int led) {
-    if ((led <= LED_16) && (led >= LED_01)) {
+    if (is_led_valid(led)) {
         if (*puntero & led_to_mask(led))
             return true;
         else

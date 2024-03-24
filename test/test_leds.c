@@ -32,27 +32,28 @@ SPDX-License-Identifier: MIT
 
 /* === Macros definitions =========================================== */
 
-#define LED_01      1
-#define LED_02      2
-#define LED_03      3
-#define LED_04      4
-#define LED_05      5
-#define LED_06      6
-#define LED_07      7
-#define LED_08      8
-#define LED_09      9
-#define LED_10      10
-#define LED_11      11
-#define LED_12      12
-#define LED_14      13
-#define LED_15      15
-#define LED_16      16
-#define LED_17      17
-#define LED_18      18
-#define ALL_LED_ON  0xFFFF
-#define ALL_LED_OFF 0x0000
-#define BIT_HIGH    1
-#define LED_OFFSET  1
+#define LED_01           1
+#define LED_02           2
+#define LED_03           3
+#define LED_04           4
+#define LED_05           5
+#define LED_06           6
+#define LED_07           7
+#define LED_08           8
+#define LED_09           9
+#define LED_10           10
+#define LED_11           11
+#define LED_12           12
+#define LED_14           13
+#define LED_15           15
+#define LED_16           16
+#define LED_17           17
+#define LED_18           18
+#define ALL_LED_ON       0xFFFF
+#define ALL_LED_OFF      0x0000
+#define BIT_HIGH         1
+#define LED_OFFSET       1
+#define LED_TO_MASK(led) (BIT_HIGH << led - LED_OFFSET)
 
 /* === Private data type declarations ==================================== */
 
@@ -77,8 +78,6 @@ void setUp(void) {
 /// sin importar el estado anterior.
 void test_todos_los_leds_inician_apagados(void) {
 
-    // TEST_FAIL_MESSAGE("Arrancamos");
-
     leds_virtuales = ALL_LED_ON;
     leds_init(&leds_virtuales);
     TEST_ASSERT_EQUAL_UINT16(ALL_LED_OFF, leds_virtuales);
@@ -93,7 +92,7 @@ void test_prender_un_led(void) {
     // El bit 2 está en alto
     TEST_ASSERT_BIT_HIGH(LED_03 - 1, leds_virtuales);
     // Todos los otros bits estan en bajo
-    TEST_ASSERT_BITS_LOW(~(BIT_HIGH << (LED_03 - LED_OFFSET)), leds_virtuales);
+    TEST_ASSERT_BITS_LOW(~(LED_TO_MASK(LED_03)), leds_virtuales);
 }
 
 /// @brief Test 3
@@ -118,7 +117,7 @@ void test_apagar_y_prender_varios_leds(void) {
     leds_turn_off(LED_05);
     leds_turn_off(LED_09);
 
-    TEST_ASSERT_EQUAL_UINT16(BIT_HIGH << (LED_07 - LED_OFFSET), leds_virtuales);
+    TEST_ASSERT_EQUAL_UINT16(LED_TO_MASK(LED_07), leds_virtuales);
 }
 
 /// @brief Test 5
@@ -127,7 +126,7 @@ void test_apagar_y_prender_varios_leds(void) {
 void test_consultar_estado_de_led(void) {
     leds_init(&leds_virtuales);
     leds_turn_on(LED_05);
-    TEST_ASSERT_EQUAL_UINT16(BIT_HIGH << (LED_05 - LED_OFFSET), leds_virtuales);
+    TEST_ASSERT_EQUAL_UINT16(LED_TO_MASK(LED_05), leds_virtuales);
     TEST_ASSERT_TRUE(leds_get_status(LED_05));
 }
 
