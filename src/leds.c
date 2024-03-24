@@ -81,8 +81,12 @@ bool leds_turn_on(int led) {
         return false;
 }
 
-void leds_turn_off(int led) {
-    *puntero &= ~led_to_mask(led);
+bool leds_turn_off(int led) {
+    if ((led <= LED_16) && (led >= LED_01)) {
+        *puntero &= ~led_to_mask(led);
+        return true;
+    } else
+        return false;
 }
 
 bool leds_get_status(int led) {

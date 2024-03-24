@@ -66,7 +66,7 @@ bool leds_turn_on(int led);
  *
  * @param led numero de bit correspondiente al led
  */
-void leds_turn_off(int led);
+bool leds_turn_off(int led);
 
 /**
  * @brief Funcion para consultar estado de LED
