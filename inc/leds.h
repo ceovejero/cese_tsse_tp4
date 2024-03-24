@@ -21,40 +21,78 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef LEDS_H
+#define LEDS_H
 
-/** @file
- ** @brief Definición de la función principal del programa
+/** @file leds.h
+ ** @brief Capa de abstracion para gestion de leds
  **/
 
-/* === Headers files inclusions ================================================================ */
+/* === Headers files inclusions ===================================== */
 
-/* === Cabecera C++ ============================================================================ */
+#include <stdint.h>
+#include <stdbool.h>
+
+/* === Cabecera C++ ===================================== */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* === Public macros definitions =============================================================== */
+/* === Public macros definitions ===================================== */
 
-/* === Public data type declarations =========================================================== */
+/* === Public data type declarations ===================================== */
 
-/* === Public variable declarations ============================================================ */
+/* === Public variable declarations ===================================== */
 
-/* === Public function declarations ============================================================ */
+/* === Public function declarations ===================================== */
 
 /**
- * @brief Función principal del sistema, se ejecuta al iniciar el programa
+ * @brief Funcion para inicializar leds
  *
- * @return int Valor de retorno, cero si esta todo bien, negativo si hay un error
+ * @param port puerto a inicializar
  */
-int main(void);
+void leds_init(uint16_t * puerto);
 
-/* === End of documentation ==================================================================== */
+/**
+ * @brief Funcion para encender un LED
+ *
+ * @param led numero de bit correspondiente al led
+ */
+bool leds_turn_on(int led);
+
+/**
+ * @brief Funcion para apagar un LED
+ *
+ * @param led numero de bit correspondiente al led
+ */
+bool leds_turn_off(int led);
+
+/**
+ * @brief Funcion para consultar estado de LED
+ *
+ * @param led numero de bit correspondiente al led
+ */
+bool leds_get_status(int led);
+
+/**
+ * @brief Funcion para encender todos los LED
+ *
+ *
+ */
+void leds_turn_on_all(void);
+
+/**
+ * @brief Funcion para apagar todos los LED
+ *
+ *
+ */
+void leds_turn_off_all(void);
+
+/* === End of documentation ===================================== */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MAIN_H */
+#endif /* LEDS_H */
